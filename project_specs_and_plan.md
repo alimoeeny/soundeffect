@@ -50,7 +50,7 @@ A macOS application that monitors system audio events and displays a custom on-s
   - Configure Info.plist for audio access
   - Add LSUIElement for background agent behavior
 
-- [ ] **Step 3**: Create AudioManager to monitor volume, mute, and output device changes
+- [x] **Step 3**: Create AudioManager to monitor volume, mute, and output device changes
   - Implement `@Observable` or `ObservableObject` class
   - Set up CoreAudio property listeners
   - Publish volume level, mute state, device info

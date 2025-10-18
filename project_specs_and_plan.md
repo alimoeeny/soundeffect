@@ -45,7 +45,7 @@ A macOS application that monitors system audio events and displays a custom on-s
   - Identify property addresses for volume, mute, output device
   - Test basic audio property reading
 
-- [ ] **Step 2**: Request necessary permissions and entitlements for system audio access
+- [x] **Step 2**: Request necessary permissions and entitlements for system audio access
   - Update entitlements file
   - Configure Info.plist for audio access
   - Add LSUIElement for background agent behavior

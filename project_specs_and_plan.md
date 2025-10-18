@@ -57,13 +57,13 @@ A macOS application that monitors system audio events and displays a custom on-s
   - Handle listener callbacks and state updates
 
 ### Phase 2: OSD UI
-- [ ] **Step 4**: Design SwiftUI OSD overlay component (semi-transparent, centered, auto-fade)
+- [x] **Step 4**: Design SwiftUI OSD overlay component (semi-transparent, centered, auto-fade)
   - Create OSDView with volume indicator
   - Design visual elements (bars, icons, background)
   - Implement fade animations with timing
   - Add auto-dismiss logic
 
-- [ ] **Step 5**: Implement window management for OSD (always-on-top, no dock icon, transparent background)
+- [x] **Step 5**: Implement window management for OSD (always-on-top, no dock icon, transparent background)
   - Configure NSWindow for overlay behavior
   - Set window level above all apps
   - Remove title bar and background
@@ -71,19 +71,19 @@ A macOS application that monitors system audio events and displays a custom on-s
   - Handle multi-monitor scenarios
 
 ### Phase 3: Integration & Polish
-- [ ] **Step 6**: Connect audio events to OSD display triggers
+- [x] **Step 6**: Connect audio events to OSD display triggers
   - Bind AudioManager state to OSD visibility
   - Trigger animations on audio changes
   - Debounce rapid changes
   - Reset auto-dismiss timer on new events
 
-- [ ] **Step 7**: Add visual feedback (volume bars, mute icon, fade animations)
+- [x] **Step 7**: Add visual feedback (volume bars, mute icon, fade animations)
   - Implement volume level visualization
   - Add mute/unmute icon states
   - Polish animation curves and timing
   - Match native macOS aesthetic
 
-- [ ] **Step 8**: Test with volume keys and verify OSD behavior matches macOS native feel
+- [x] **Step 8**: Test with volume keys and verify OSD behavior matches macOS native feel
   - Test volume up/down keys
   - Test mute toggle
   - Verify timing and positioning

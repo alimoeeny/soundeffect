@@ -49,8 +49,10 @@ struct OSDView: View {
         }
         .frame(width: 280, height: 200)
         .opacity(isVisible ? 1 : 0)
-        .scaleEffect(isVisible ? 1 : 0.8)
-        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isVisible)
+        .scaleEffect(isVisible ? 1 : 0.85)
+        .animation(.spring(response: 0.25, dampingFraction: 0.75), value: isVisible)
+        .animation(.easeInOut(duration: 0.15), value: volume)
+        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isMuted)
     }
 }
 
@@ -85,7 +87,7 @@ struct VolumeBar: View {
         RoundedRectangle(cornerRadius: barWidth / 2)
             .fill(isActive ? barColor : Color.white.opacity(0.2))
             .frame(width: barWidth)
-            .animation(.easeInOut(duration: 0.1), value: isActive)
+            .animation(.easeOut(duration: 0.08), value: isActive)
     }
 }
 

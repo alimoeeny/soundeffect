@@ -39,9 +39,10 @@ class OSDCoordinator {
             _ = audioMonitor.volume
             _ = audioMonitor.isMuted
         } onChange: { [weak self] in
-            Task { @MainActor in
-                self?.handleAudioChange()
-                self?.observeAudioChanges()
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                self.handleAudioChange()
+                self.observeAudioChanges()
             }
         }
     }
@@ -63,11 +64,11 @@ class OSDCoordinator {
         
         // Hide after delay
         Task {
-            try? await Task.sleep(for: .seconds(1.5))
+            try? await Task.sleep(for: .seconds(1.2))
             await MainActor.run {
                 self.isVisible = false
                 Task {
-                    try? await Task.sleep(for: .seconds(0.3))
+                    try? await Task.sleep(for: .seconds(0.25))
                     await MainActor.run {
                         self.windowController?.hide()
                     }

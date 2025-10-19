@@ -12,6 +12,7 @@ struct SoundEffectApp: App {
     @State private var audioMonitor = AudioMonitor()
     @State private var osdCoordinator: OSDCoordinator?
     @State private var menuBarController: MenuBarController?
+    private let updateManager = UpdateManager()
     
     init() {
         // Initialize OSD coordinator on app launch
@@ -20,9 +21,11 @@ struct SoundEffectApp: App {
         _osdCoordinator = State(initialValue: OSDCoordinator(audioMonitor: monitor))
         
         // Initialize menu bar
-        _menuBarController = State(initialValue: MenuBarController(onQuit: {
-            NSApplication.shared.terminate(nil)
-        }))
+        let manager = UpdateManager()
+        _menuBarController = State(initialValue: MenuBarController(
+            onQuit: { NSApplication.shared.terminate(nil) },
+            updateManager: manager
+        ))
     }
     
     var body: some Scene {

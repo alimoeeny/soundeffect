@@ -11,9 +11,11 @@ import SwiftUI
 class MenuBarController: NSObject {
     private var statusItem: NSStatusItem?
     private let onQuit: () -> Void
+    private let updateManager: UpdateManager
     
-    init(onQuit: @escaping () -> Void) {
+    init(onQuit: @escaping () -> Void, updateManager: UpdateManager) {
         self.onQuit = onQuit
+        self.updateManager = updateManager
         super.init()
         setupMenuBar()
     }
@@ -54,6 +56,17 @@ class MenuBarController: NSObject {
         
         menu.addItem(NSMenuItem.separator())
         
+        // Check for Updates item
+        let updateItem = NSMenuItem(
+            title: "Check for Updates...",
+            action: #selector(checkForUpdates),
+            keyEquivalent: ""
+        )
+        updateItem.target = self
+        menu.addItem(updateItem)
+        
+        menu.addItem(NSMenuItem.separator())
+        
         // Quit item
         let quitItem = NSMenuItem(
             title: "Quit SoundEffect",
@@ -82,6 +95,10 @@ class MenuBarController: NSObject {
         alert.alertStyle = .informational
         alert.addButton(withTitle: "OK")
         alert.runModal()
+    }
+    
+    @objc private func checkForUpdates() {
+        updateManager.checkForUpdates()
     }
     
     @objc private func quitApp() {

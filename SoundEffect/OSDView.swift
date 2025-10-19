@@ -12,17 +12,26 @@ struct OSDView: View {
     let isMuted: Bool
     let isVisible: Bool
     
-    private let barCount = 16
-    private let barWidth: CGFloat = 6
-    private let barSpacing: CGFloat = 4
-    private let cornerRadius: CGFloat = 16
+    private let barCount = 12
+    private let barWidth: CGFloat = 15
+    private let barHeight: CGFloat = 15
+    private let barSpacing: CGFloat = 6
+    private let cornerRadius: CGFloat = 32
     
     var body: some View {
         ZStack {
-            // Background blur effect
+            // Background blur effect with border
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(.ultraThinMaterial)
-                .shadow(color: .black.opacity(0.3), radius: 20, x: 0, y: 10)
+                .fill(.black.opacity(0.75))
+                .background(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(.ultraThinMaterial)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .strokeBorder(.white.opacity(0.15), lineWidth: 1)
+                )
+                .shadow(color: .black.opacity(0.4), radius: 25, x: 0, y: 12)
             
             VStack(spacing: 20) {
                 // Icon
@@ -39,11 +48,12 @@ struct OSDView: View {
                             totalBars: barCount,
                             volume: volume,
                             isMuted: isMuted,
-                            barWidth: barWidth
+                            barWidth: barWidth,
+                            barHeight: barHeight
                         )
                     }
                 }
-                .frame(height: 80)
+                .frame(height: 50)
             }
             .padding(30)
         }
@@ -62,6 +72,7 @@ struct VolumeBar: View {
     let volume: Float
     let isMuted: Bool
     let barWidth: CGFloat
+    let barHeight: CGFloat
     
     private var isActive: Bool {
         let threshold = Float(index) / Float(totalBars)
@@ -84,9 +95,14 @@ struct VolumeBar: View {
     }
     
     var body: some View {
-        RoundedRectangle(cornerRadius: barWidth / 2)
-            .fill(isActive ? barColor : Color.white.opacity(0.2))
-            .frame(width: barWidth)
+        RoundedRectangle(cornerRadius: 3)
+            .fill(isActive ? barColor : Color.white.opacity(0.15))
+            .frame(width: barWidth, height: barHeight)
+            .overlay(
+                RoundedRectangle(cornerRadius: 3)
+                    .strokeBorder(isActive ? Color.white.opacity(0.2) : Color.clear, lineWidth: 0.5)
+            )
+            .shadow(color: isActive ? barColor.opacity(0.3) : .clear, radius: 2, x: 0, y: 1)
             .animation(.easeOut(duration: 0.08), value: isActive)
     }
 }

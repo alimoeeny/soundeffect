@@ -10,7 +10,7 @@ import AppKit
 
 class OSDWindowController: NSWindowController {
     private var hideTimer: Timer?
-    private let displayDuration: TimeInterval = 1.2
+    private let displayDuration: TimeInterval = 1.8
     
     convenience init(contentView: NSView) {
         let window = NSWindow(

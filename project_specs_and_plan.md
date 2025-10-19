@@ -105,6 +105,23 @@ A macOS application that monitors system audio events and displays a custom on-s
 - **Reliable**: Robust event handling without crashes
 - **Extensible**: Architecture supports adding more system events later
 
+## Stretch Goals (In Progress)
+- [ ] **SG-1**: Add menu bar icon
+  - Create menu bar item with app icon
+  - Add menu with Settings and Quit options
+  - Handle menu interactions
+
+- [ ] **SG-2**: Improve OSD visual design
+  - Make OSD corners more rounded
+  - Increase transparency/blur effect
+  - Change bars from tall to square shape
+  - Add subtle border/shadow to bars and window
+
+- [ ] **SG-3**: Add audio feedback
+  - Implement "bloop" sound on volume changes
+  - Match iconic Apple UI volume sound
+  - Play on each volume step
+
 ## Future Enhancements (Post-MVP)
 - Brightness change monitoring
 - Keyboard backlight events

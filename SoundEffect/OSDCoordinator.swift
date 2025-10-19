@@ -13,9 +13,14 @@ class OSDCoordinator {
     var isVisible = false
     private var windowController: OSDWindowController?
     private let audioMonitor: AudioMonitor
+    private let soundFeedback = SoundFeedback()
+    private var lastVolume: Float = 0.0
+    private var lastMuteState: Bool = false
     
     init(audioMonitor: AudioMonitor) {
         self.audioMonitor = audioMonitor
+        self.lastVolume = audioMonitor.volume
+        self.lastMuteState = audioMonitor.isMuted
         setupWindow()
         observeAudioChanges()
     }
@@ -48,6 +53,15 @@ class OSDCoordinator {
     }
     
     private func handleAudioChange() {
+        // Play sound feedback
+        if audioMonitor.isMuted != lastMuteState {
+            soundFeedback.playMuteSound()
+            lastMuteState = audioMonitor.isMuted
+        } else if abs(audioMonitor.volume - lastVolume) > 0.01 {
+            soundFeedback.playVolumeChangeSound(volume: audioMonitor.volume)
+            lastVolume = audioMonitor.volume
+        }
+        
         updateOSDContent()
         showOSD()
     }
@@ -64,7 +78,7 @@ class OSDCoordinator {
         
         // Hide after delay
         Task {
-            try? await Task.sleep(for: .seconds(1.2))
+            try? await Task.sleep(for: .seconds(1.8))
             await MainActor.run {
                 self.isVisible = false
                 Task {

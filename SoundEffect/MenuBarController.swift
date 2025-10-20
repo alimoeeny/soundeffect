@@ -24,8 +24,8 @@ class MenuBarController: NSObject {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "speaker.wave.3.fill", accessibilityDescription: "SoundEffect")
-            button.image?.isTemplate = true
+            button.image = NSImage(named: "MenuBarIcon")
+            button.image?.isTemplate = true  // Adapts to light/dark mode
         }
         
         setupMenu()

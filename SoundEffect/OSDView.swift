@@ -31,7 +31,6 @@ struct OSDView: View {
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .strokeBorder(.white.opacity(0.15), lineWidth: 1)
                 )
-                .shadow(color: .black.opacity(0.4), radius: 25, x: 0, y: 12)
             
             VStack(spacing: 20) {
                 // Icon

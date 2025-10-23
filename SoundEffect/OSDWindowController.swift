@@ -26,8 +26,19 @@ class OSDWindowController: NSWindowController {
         window.level = .statusBar
         window.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle]
         window.isMovableByWindowBackground = false
-        window.hasShadow = false
+        window.hasShadow = true
         window.contentView = contentView
+        
+        // Ensure proper corner rendering with layer-backed view
+        contentView.wantsLayer = true
+        contentView.layer?.cornerRadius = 32
+        contentView.layer?.masksToBounds = false
+        
+        // Add shadow to the layer for clean rendering
+        contentView.layer?.shadowColor = NSColor.black.cgColor
+        contentView.layer?.shadowOpacity = 0.4
+        contentView.layer?.shadowRadius = 25
+        contentView.layer?.shadowOffset = CGSize(width: 0, height: -12)
         
         self.init(window: window)
         

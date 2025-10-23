@@ -16,6 +16,7 @@ class OSDCoordinator {
     private let soundFeedback = SoundFeedback()
     private var lastVolume: Float = 0.0
     private var lastMuteState: Bool = false
+    private var hideTask: Task<Void, Never>?
     
     init(audioMonitor: AudioMonitor) {
         self.audioMonitor = audioMonitor
@@ -67,6 +68,9 @@ class OSDCoordinator {
     }
     
     func showOSD() {
+        // Cancel any existing hide task to prevent flickering
+        hideTask?.cancel()
+        
         isVisible = true
         updateOSDContent()
         
@@ -77,12 +81,16 @@ class OSDCoordinator {
         }
         
         // Hide after delay
-        Task {
+        hideTask = Task {
             try? await Task.sleep(for: .seconds(1.8))
+            guard !Task.isCancelled else { return }
+            
             await MainActor.run {
                 self.isVisible = false
                 Task {
                     try? await Task.sleep(for: .seconds(0.25))
+                    guard !Task.isCancelled else { return }
+                    
                     await MainActor.run {
                         self.windowController?.hide()
                     }

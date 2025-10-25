@@ -39,20 +39,27 @@ struct OSDView: View {
                     .foregroundStyle(isMuted ? .red : Color(red: 119/255, green: 117/255, blue: 113/255))
                     .symbolEffect(.bounce, value: isMuted)
 
-                // Volume bars
-                HStack(spacing: barSpacing) {
-                    ForEach(0..<barCount, id: \.self) { index in
-                        VolumeBar(
-                            index: index,
-                            totalBars: barCount,
-                            volume: volume,
-                            isMuted: isMuted,
-                            barWidth: barWidth,
-                            barHeight: barHeight
-                        )
+                VStack(spacing: 8) {
+                    // Volume bars
+                    HStack(spacing: barSpacing) {
+                        ForEach(0..<barCount, id: \.self) { index in
+                            VolumeBar(
+                                index: index,
+                                totalBars: barCount,
+                                volume: volume,
+                                isMuted: isMuted,
+                                barWidth: barWidth,
+                                barHeight: barHeight
+                            )
+                        }
                     }
+                    .frame(height: 50)
+                    
+                    // Volume percentage
+                    Text("\(Int(volume * 100))%")
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .foregroundStyle(Color(red: 119/255, green: 117/255, blue: 113/255))
                 }
-                .frame(height: 50)
             }
             .padding(30)
         }

@@ -22,7 +22,7 @@ struct OSDView: View {
         ZStack {
             // Background blur effect with border
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(.black.opacity(0.75))
+                .fill(Color(red: 235/255, green: 233/255, blue: 227/255).opacity(0.46))
                 .background(
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .fill(.ultraThinMaterial)
@@ -36,7 +36,7 @@ struct OSDView: View {
                 // Icon
                 Image(systemName: isMuted ? "speaker.slash.fill" : "speaker.wave.3.fill")
                     .font(.system(size: 48))
-                    .foregroundStyle(isMuted ? .red : .white)
+                    .foregroundStyle(isMuted ? .red : Color(red: 119/255, green: 117/255, blue: 113/255))
                     .symbolEffect(.bounce, value: isMuted)
 
                 // Volume bars
@@ -86,8 +86,10 @@ struct VolumeBar: View {
         }
 
         let ratio = Float(index) / Float(totalBars)
+        let baseColor = Color(red: 119/255, green: 117/255, blue: 113/255)
+        
         if ratio < 0.6 {
-            return .white
+            return baseColor
         } else if ratio < 0.85 {
             return .yellow
         } else {
@@ -97,11 +99,11 @@ struct VolumeBar: View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: 3)
-            .fill(isActive ? barColor : Color.white.opacity(0.15))
+            .fill(isActive ? barColor : Color(red: 119/255, green: 117/255, blue: 113/255).opacity(0.15))
             .frame(width: barWidth, height: barHeight)
             .overlay(
                 RoundedRectangle(cornerRadius: 3)
-                    .strokeBorder(isActive ? Color.white.opacity(0.2) : Color.clear, lineWidth: 0.5)
+                    .strokeBorder(isActive ? Color(red: 119/255, green: 117/255, blue: 113/255).opacity(0.2) : Color.clear, lineWidth: 0.5)
             )
             .shadow(color: isActive ? barColor.opacity(0.3) : .clear, radius: 2, x: 0, y: 1)
             .animation(.easeOut(duration: 0.08), value: isActive)

@@ -101,11 +101,6 @@ struct VolumeBar: View {
         RoundedRectangle(cornerRadius: 3)
             .fill(isActive ? barColor : Color(red: 119/255, green: 117/255, blue: 113/255).opacity(0.15))
             .frame(width: barWidth, height: barHeight)
-            .overlay(
-                RoundedRectangle(cornerRadius: 3)
-                    .strokeBorder(isActive ? Color(red: 119/255, green: 117/255, blue: 113/255).opacity(0.2) : Color.clear, lineWidth: 0.5)
-            )
-            .shadow(color: isActive ? barColor.opacity(0.3) : .clear, radius: 2, x: 0, y: 1)
             .animation(.easeOut(duration: 0.08), value: isActive)
     }
 }

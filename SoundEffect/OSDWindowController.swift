@@ -14,7 +14,7 @@ class OSDWindowController: NSWindowController {
     
     convenience init(contentView: NSView) {
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 280, height: 200),
+            contentRect: NSRect(x: 0, y: 0, width: 310, height: 230),
             styleMask: [.borderless],
             backing: .buffered,
             defer: false
@@ -29,9 +29,8 @@ class OSDWindowController: NSWindowController {
         window.hasShadow = true
         window.contentView = contentView
         
-        // Ensure proper corner rendering with layer-backed view
+        // Ensure proper rendering with layer-backed view
         contentView.wantsLayer = true
-        contentView.layer?.cornerRadius = 32
         contentView.layer?.masksToBounds = false
         
         // Add shadow to the layer for clean rendering

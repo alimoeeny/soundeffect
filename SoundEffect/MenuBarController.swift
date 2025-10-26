@@ -80,9 +80,12 @@ class MenuBarController: NSObject {
     }
     
     @objc private func showAbout() {
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown"
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown"
+        
         let alert = NSAlert()
         alert.messageText = "SoundEffect"
-        alert.informativeText = "Custom volume OSD for macOS\n\nVersion 1.0\n\nMonitors system audio and displays a beautiful overlay when volume changes."
+        alert.informativeText = "Custom volume OSD for macOS\n\nVersion \(version) (Build \(build))\n\nMonitors system audio and displays a beautiful overlay when volume changes."
         alert.alertStyle = .informational
         alert.addButton(withTitle: "OK")
         alert.runModal()

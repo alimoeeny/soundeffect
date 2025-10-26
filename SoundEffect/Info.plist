@@ -21,7 +21,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>SUFeedURL</key>
-	<string>https://alimoeeny.github.io/soundeffect/appcast.xml</string>
+	<string>https://ali.moeeny.com/soundeffect/appcast.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>XKgGKVApq/5CtJcdYv47pC9nsqn+KwUPyRb/r3H9hyQ=</string>
 	<key>SUEnableAutomaticChecks</key>

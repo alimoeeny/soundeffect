@@ -6,6 +6,25 @@
     <description>SoundEffect app updates</description>
     <language>en</language>
     <item>
+      <title>Version 1.0.5</title>
+      <sparkle:version>1.0.5</sparkle:version>
+      <sparkle:shortVersionString>1.0.5</sparkle:shortVersionString>
+      <pubDate>Fri, 25 Oct 2024 22:13:00 -0400</pubDate>
+      <description><![CDATA[
+        <h2>SoundEffect v1.0.5</h2>
+        <ul>
+          <li>✅ About dialog now shows actual app version</li>
+          <li>✅ Display version and build number dynamically</li>
+        </ul>
+      ]]></description>
+      <enclosure 
+        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.5/SoundEffect-1.0.5.dmg"
+        sparkle:edSignature="cVnfd5GAd0aJS/8UC9G+2oM4hwX255vPh7Tx2+FFqXF1YoPprM8Z9ZjADpEI7nsN8ssySE1k35B3OLJpalFrAw=="
+        length="2577468"
+        type="application/octet-stream"
+      />
+    </item>
+    <item>
       <title>Version 1.0.4</title>
       <sparkle:version>1.0.4</sparkle:version>
       <sparkle:shortVersionString>1.0.4</sparkle:shortVersionString>
@@ -14,34 +33,13 @@
         <h2>SoundEffect v1.0.4</h2>
         <ul>
           <li>✅ Fix auto-update feed URL</li>
-          <li>✅ Update to use custom domain (ali.moeeny.com)</li>
-          <li>✅ "Check for Updates" now works correctly</li>
+          <li>✅ Update to use custom domain</li>
         </ul>
       ]]></description>
       <enclosure 
         url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.4/SoundEffect-1.0.4.dmg"
         sparkle:edSignature="1TAU+yAltf6gDSnpv7yoImXoxtsOrPNPklFPtpHGFMejAlTm/cdDArlFc9T5fQxIOJmiymTMEdce9keds4PrCQ=="
         length="2576376"
-        type="application/octet-stream"
-      />
-    </item>
-    <item>
-      <title>Version 1.0.3</title>
-      <sparkle:version>1.0.3</sparkle:version>
-      <sparkle:shortVersionString>1.0.3</sparkle:shortVersionString>
-      <pubDate>Fri, 25 Oct 2024 22:00:00 -0400</pubDate>
-      <description><![CDATA[
-        <h2>SoundEffect v1.0.3</h2>
-        <ul>
-          <li>✅ Fix auto-updates functionality</li>
-          <li>✅ Add proper Info.plist with Sparkle configuration</li>
-          <li>✅ "Check for Updates" now works correctly</li>
-        </ul>
-      ]]></description>
-      <enclosure 
-        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.3/SoundEffect-1.0.3.dmg"
-        sparkle:edSignature="2RQBs5kwIDsdmcC4pdYZ9Gz2sveZKuEOdbiLjKO5KuwgD3T0OHiEMn6snfz/yOJPTJOFP341K1j4WS149CbGDQ=="
-        length="2576370"
         type="application/octet-stream"
       />
     </item>

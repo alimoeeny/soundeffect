@@ -281,7 +281,9 @@
 				INFOPLIST_KEY_CFBundleDisplayName = SoundEffect;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_SUFeedURL = "https://yourdomain.com/appcast.xml";
+				INFOPLIST_KEY_SUEnableAutomaticChecks = YES;
+				INFOPLIST_KEY_SUFeedURL = "https://alimoeeny.github.io/soundeffect/appcast.xml";
+				INFOPLIST_KEY_SUPublicEDKey = "XKgGKVApq/5CtJcdYv47pC9nsqn+KwUPyRb/r3H9hyQ=";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -326,7 +328,9 @@
 				INFOPLIST_KEY_CFBundleDisplayName = SoundEffect;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_SUFeedURL = "https://yourdomain.com/appcast.xml";
+				INFOPLIST_KEY_SUEnableAutomaticChecks = YES;
+				INFOPLIST_KEY_SUFeedURL = "https://alimoeeny.github.io/soundeffect/appcast.xml";
+				INFOPLIST_KEY_SUPublicEDKey = "XKgGKVApq/5CtJcdYv47pC9nsqn+KwUPyRb/r3H9hyQ=";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

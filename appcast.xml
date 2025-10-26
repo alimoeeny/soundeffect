@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>SoundEffect Updates</title>
+    <link>https://alimoeeny.github.io/soundeffect/appcast.xml\</link\>
+    <description>SoundEffect app updates</description>
+    <language>en</language>
+    <item>
+      <title>Version 1.0.2</title>
+      <sparkle:version>1.0.2</sparkle:version>
+      <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
+      <pubDate>Fri, 25 Oct 2024 21:25:00 -0400</pubDate>
+      <description><![CDATA[
+        <h2>SoundEffect v1.0.2</h2>
+        <ul>
+          <li>Configure Sparkle auto-updates</li>
+          <li>Add "Check for Updates" menu item</li>
+          <li>Automatic update checking enabled</li>
+        </ul>
+      ]]></description>
+      <enclosure 
+        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.2/SoundEffect-1.0.2.dmg"
+        sparkle:edSignature="B/oc9ZVznCiZR83tiaMe9Wzv/kdYtG33oeVTg6DKPXtkUuVXYIhvTa81mzLR6wPoSrJQEqrv/RoEUKHUOA4gDg=="
+        length="30448640"
+        type="application/octet-stream"
+      />
+    </item>
+  </channel>
+</rss>

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
   <channel>
     <title>SoundEffect Updates</title>
-    <link>https://ali.moeeny.com/soundeffect/appcast.xml\</link\>
+    <link>https://ali.moeeny.com/soundeffect/appcast.xml</link>
     <description>SoundEffect app updates</description>
     <language>en</language>
     <item>
@@ -17,10 +17,29 @@
           <li>Display version and build number dynamically</li>
         </ul>
       ]]></description>
-      <enclosure 
+      <enclosure
         url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.5/SoundEffect-1.0.5.dmg"
         sparkle:edSignature="cVnfd5GAd0aJS/8UC9G+2oM4hwX255vPh7Tx2+FFqXF1YoPprM8Z9ZjADpEI7nsN8ssySE1k35B3OLJpalFrAw=="
         length="2577468"
+        type="application/octet-stream"
+      />
+    </item>
+    <item>
+      <title>Version 1.0.4</title>
+      <sparkle:version>1.0.4</sparkle:version>
+      <sparkle:shortVersionString>1.0.4</sparkle:shortVersionString>
+      <pubDate>Fri, 25 Oct 2024 22:07:00 -0400</pubDate>
+      <description><![CDATA[
+        <h2>SoundEffect v1.0.4</h2>
+        <ul>
+          <li>Fix auto-update feed URL</li>
+          <li>Update to use custom domain</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.4/SoundEffect-1.0.4.dmg"
+        sparkle:edSignature="1TAU+yAltf6gDSnpv7yoImXoxtsOrPNPklFPtpHGFMejAlTm/cdDArlFc9T5fQxIOJmiymTMEdce9keds4PrCQ=="
+        length="2576376"
         type="application/octet-stream"
       />
     </item>

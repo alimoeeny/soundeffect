@@ -13,8 +13,8 @@
       <description><![CDATA[
         <h2>SoundEffect v1.0.5</h2>
         <ul>
-          <li>✅ About dialog now shows actual app version</li>
-          <li>✅ Display version and build number dynamically</li>
+          <li>About dialog now shows actual app version</li>
+          <li>Display version and build number dynamically</li>
         </ul>
       ]]></description>
       <enclosure 
@@ -32,8 +32,8 @@
       <description><![CDATA[
         <h2>SoundEffect v1.0.4</h2>
         <ul>
-          <li>✅ Fix auto-update feed URL</li>
-          <li>✅ Update to use custom domain</li>
+          <li>Fix auto-update feed URL</li>
+          <li>Update to use custom domain</li>
         </ul>
       ]]></description>
       <enclosure 

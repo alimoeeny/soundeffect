@@ -6,6 +6,26 @@
     <description>SoundEffect app updates</description>
     <language>en</language>
     <item>
+      <title>Version 1.0.11</title>
+      <sparkle:version>1.0.11</sparkle:version>
+      <sparkle:shortVersionString>1.0.11</sparkle:shortVersionString>
+      <pubDate>Fri, 01 Nov 2024 12:28:00 -0400</pubDate>
+      <description><![CDATA[
+        <h2>SoundEffect v1.0.11</h2>
+        <ul>
+          <li>🎉 Auto-updates now working! (Disabled sandbox for installer)</li>
+          <li>✨ New split-bar design with gradient effect</li>
+          <li>🎨 Less transparent background for better visibility</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.11/SoundEffect.zip"
+        sparkle:edSignature="bnbA6VUFnaY8KeA2HyXhtRH71uAGieEi1nvH9SXx0QoQ9UbVqebvWkpRuQwtHc9Hjzm3tq+88g3qwX3z8IXlCQ=="
+        length="2651160"
+        type="application/octet-stream"
+      />
+    </item>
+    <item>
       <title>Version 1.0.10</title>
       <sparkle:version>1.0.10</sparkle:version>
       <sparkle:shortVersionString>1.0.10</sparkle:shortVersionString>

@@ -6,6 +6,25 @@
     <description>SoundEffect app updates</description>
     <language>en</language>
     <item>
+      <title>Version 1.0.7</title>
+      <sparkle:version>1.0.7</sparkle:version>
+      <sparkle:shortVersionString>1.0.7</sparkle:shortVersionString>
+      <pubDate>Fri, 01 Nov 2024 09:30:00 -0400</pubDate>
+      <description><![CDATA[
+        <h2>SoundEffect v1.0.7</h2>
+        <ul>
+          <li>✨ New split-bar design with gradient effect</li>
+          <li>🎨 Less transparent background for better visibility</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.7/SoundEffect-1.0.7.dmg"
+        sparkle:edSignature="Njyrk8nuC8E2mafcjRcWsBXn2j2JhnnkNZ5ImKGPpp5sm7gbL7FHL76FOjxBW+Uk9PUZWQRtHyk4+O4VpKjbDw=="
+        length="2578785"
+        type="application/octet-stream"
+      />
+    </item>
+    <item>
       <title>Version 1.0.6</title>
       <sparkle:version>1.0.6</sparkle:version>
       <sparkle:shortVersionString>1.0.6</sparkle:shortVersionString>
@@ -14,7 +33,6 @@
         <h2>SoundEffect v1.0.6</h2>
         <ul>
           <li>✅ Enable network access for auto-updates</li>
-          <li>✅ Fix "Check for Updates" functionality</li>
           <li>✅ Auto-updates now fully working!</li>
         </ul>
       ]]></description>
@@ -22,24 +40,6 @@
         url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.6/SoundEffect-1.0.6.dmg"
         sparkle:edSignature="0yW+eBU9ynehJMELlCW+hyn+yaEaYEzKc1fyq8D5tvNYB3uTPQYIP6evuEpk6xWOMz6L+eYUkgmOitXsE4eqBQ=="
         length="2577515"
-        type="application/octet-stream"
-      />
-    </item>
-    <item>
-      <title>Version 1.0.5</title>
-      <sparkle:version>1.0.5</sparkle:version>
-      <sparkle:shortVersionString>1.0.5</sparkle:shortVersionString>
-      <pubDate>Fri, 25 Oct 2024 22:13:00 -0400</pubDate>
-      <description><![CDATA[
-        <h2>SoundEffect v1.0.5</h2>
-        <ul>
-          <li>About dialog shows actual app version</li>
-        </ul>
-      ]]></description>
-      <enclosure
-        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.5/SoundEffect-1.0.5.dmg"
-        sparkle:edSignature="cVnfd5GAd0aJS/8UC9G+2oM4hwX255vPh7Tx2+FFqXF1YoPprM8Z9ZjADpEI7nsN8ssySE1k35B3OLJpalFrAw=="
-        length="2577468"
         type="application/octet-stream"
       />
     </item>

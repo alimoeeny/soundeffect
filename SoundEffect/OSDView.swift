@@ -22,7 +22,7 @@ struct OSDView: View {
         ZStack {
             // Background blur effect with border
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color(red: 235/255, green: 233/255, blue: 227/255).opacity(0.46))
+                .fill(Color(red: 235/255, green: 233/255, blue: 227/255).opacity(0.70))
                 .background(
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .fill(.ultraThinMaterial)
@@ -54,7 +54,7 @@ struct OSDView: View {
                         }
                     }
                     .frame(height: 50)
-                    
+
                     // Volume percentage
                     Text("\(Int(volume * 100))%")
                         .font(.system(size: 14, weight: .medium, design: .rounded))
@@ -94,7 +94,7 @@ struct VolumeBar: View {
 
         let ratio = Float(index) / Float(totalBars)
         let baseColor = Color(red: 119/255, green: 117/255, blue: 113/255)
-        
+
         if ratio < 0.6 {
             return baseColor
         } else if ratio < 0.85 {
@@ -105,10 +105,28 @@ struct VolumeBar: View {
     }
 
     var body: some View {
-        RoundedRectangle(cornerRadius: 3)
+        HStack(spacing: 0) {
+            // Left half - brighter (rounded on left corners only)
+            UnevenRoundedRectangle(
+                topLeadingRadius: 3,
+                bottomLeadingRadius: 3,
+                bottomTrailingRadius: 0,
+                topTrailingRadius: 0
+            )
             .fill(isActive ? barColor : Color(red: 119/255, green: 117/255, blue: 113/255).opacity(0.15))
-            .frame(width: barWidth, height: barHeight)
-            .animation(.easeOut(duration: 0.08), value: isActive)
+            .frame(width: barWidth / 2, height: barHeight)
+            
+            // Right half - darker (rounded on right corners only)
+            UnevenRoundedRectangle(
+                topLeadingRadius: 0,
+                bottomLeadingRadius: 0,
+                bottomTrailingRadius: 3,
+                topTrailingRadius: 3
+            )
+            .fill(isActive ? barColor.opacity(0.6) : Color(red: 119/255, green: 117/255, blue: 113/255).opacity(0.10))
+            .frame(width: barWidth / 2, height: barHeight)
+        }
+        .animation(.easeOut(duration: 0.08), value: isActive)
     }
 }
 

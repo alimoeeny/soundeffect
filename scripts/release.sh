@@ -41,7 +41,7 @@ spctl --assess --verbose ./build/SoundEffect.app
 
 # Create ZIP for notarization
 echo "🗜️  Creating ZIP..."
-ditto -c -k --keepParent ./build/SoundEffect.app ./build/SoundEffect.zip
+ditto -c -k --keepParent --norsrc ./build/SoundEffect.app ./build/SoundEffect.zip
 
 # Notarize
 echo "📝 Submitting for notarization..."

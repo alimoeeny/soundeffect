@@ -85,37 +85,81 @@ INFOPLIST_FILE = SoundEffect/Info.plist
 5. **Enable GitHub Pages in Repo Settings**
    - Settings → Pages → Source: gh-pages branch
 
-6. **Build and Sign Release**
+## Release Process (CRITICAL ORDER!)
+
+**⚠️ IMPORTANT**: You MUST sign the release files BEFORE uploading to GitHub. The signature is cryptographically tied to the exact file contents!
+
+6. **Build and Notarize Release**
    ```bash
+   rm -rf build/
    ./scripts/release.sh 1.0.x
-   ~/Downloads/Sparkle-for-Swift-Package-Manager/bin/sign_update ./build/SoundEffect-1.0.x.dmg
    ```
+   This creates notarized/stapled files in `./build/`:
+   - `SoundEffect.app`
+   - `SoundEffect.zip` (for Sparkle updates)
+   - `SoundEffect-1.0.x.dmg` (for manual downloads)
 
-7. **Create Appcast XML**
-   - Create manually in text editor (avoid shell heredoc)
-   - Include signature and file size from sign_update
-   - Verify no backslashes in tags
-
-8. **Upload to GitHub Pages**
+7. **Sign the Release Files**
    ```bash
-   git checkout gh-pages
-   cp appcast.xml .
-   git add appcast.xml
-   git commit -m "Update appcast for v1.0.x"
-   git push origin gh-pages
-   git checkout develop
+   # Sign the ZIP (this is what Sparkle will download)
+   ~/Downloads/Sparkle-for-Swift-Package-Manager/bin/sign_update ./build/SoundEffect.zip
+   ```
+   Save the output signature and length!
+
+8. **Create GitHub Release and Upload Files**
+   ```bash
+   git tag -a v1.0.x -m 'Release version 1.0.x'
+   git push origin v1.0.x
+   ```
+   Then on GitHub:
+   - Create release for tag v1.0.x
+   - Upload `SoundEffect.zip` (for auto-updates)
+   - Upload `SoundEffect-1.0.x.dmg` (for manual downloads)
+   - **DO NOT modify files after uploading!**
+
+9. **Create Appcast XML**
+   - Create manually in text editor (avoid shell heredoc)
+   - Use **ZIP file** URL (not DMG) for the enclosure
+   - Include signature and file size from step 7
+   - Verify no backslashes in tags
+   
+   Example:
+   ```xml
+   <enclosure 
+     url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.x/SoundEffect.zip"
+     sparkle:edSignature="SIGNATURE_FROM_STEP_7"
+     length="LENGTH_FROM_STEP_7"
+     type="application/octet-stream"
+   />
    ```
 
-9. **Create GitHub Release**
-   - Upload DMG to releases
-   - Tag must match version in appcast
+10. **Deploy Appcast to GitHub Pages**
+    ```bash
+    git checkout gh-pages
+    cp appcast.xml .
+    git add appcast.xml
+    git commit -m "Update appcast for v1.0.x"
+    git push origin gh-pages
+    git checkout develop
+    ```
 
-10. **Test**
+11. **Test**
     - Install app
     - Click "Check for Updates"
-    - Should detect new version!
+    - Should detect new version and install successfully!
 
 ## Common Errors and Solutions
+
+### "An error occurred while launching the installer"
+
+**Cause**: Signature mismatch! You uploaded files to GitHub BEFORE signing them with `sign_update`.
+
+**Solution**: 
+1. Delete the release assets from GitHub
+2. Sign the files in `./build/` with `sign_update`
+3. Upload the SIGNED files to GitHub
+4. Update appcast with the new signature
+5. Never modify files after signing!
 
 ### "An error occurred in retrieving update information"
 

@@ -89,51 +89,47 @@ INFOPLIST_FILE = SoundEffect/Info.plist
 
 **⚠️ IMPORTANT**: You MUST sign the release files BEFORE uploading to GitHub. The signature is cryptographically tied to the exact file contents!
 
-6. **Build and Notarize Release**
+6. **Build, Notarize, and Sign Release**
    ```bash
    rm -rf build/
    ./scripts/release.sh 1.0.x
    ```
-   This creates notarized/stapled files in `./build/`:
-   - `SoundEffect.app`
-   - `SoundEffect.zip` (for Sparkle updates)
-   - `SoundEffect-1.0.x.dmg` (for manual downloads)
+   This automatically:
+   - Builds and notarizes the app
+   - Creates `SoundEffect.zip` and signs it with Sparkle
+   - Creates `SoundEffect-1.0.x.dmg` for manual downloads
+   - Displays the Sparkle signature at the end
+   
+   **IMPORTANT**: Copy the signature output! You'll need it for the appcast.
 
-7. **Sign the Release Files**
-   ```bash
-   # Sign the ZIP (this is what Sparkle will download)
-   ~/Downloads/Sparkle-for-Swift-Package-Manager/bin/sign_update ./build/SoundEffect.zip
-   ```
-   Save the output signature and length!
-
-8. **Create GitHub Release and Upload Files**
+7. **Create GitHub Release and Upload Files**
    ```bash
    git tag -a v1.0.x -m 'Release version 1.0.x'
    git push origin v1.0.x
    ```
    Then on GitHub:
    - Create release for tag v1.0.x
-   - Upload `SoundEffect.zip` (for auto-updates)
-   - Upload `SoundEffect-1.0.x.dmg` (for manual downloads)
+   - Upload `SoundEffect.zip` from `./build/` (already signed!)
+   - Upload `SoundEffect-1.0.x.dmg` for manual downloads
    - **DO NOT modify files after uploading!**
 
-9. **Create Appcast XML**
+8. **Create Appcast XML**
    - Create manually in text editor (avoid shell heredoc)
    - Use **ZIP file** URL (not DMG) for the enclosure
-   - Include signature and file size from step 7
+   - Include signature from step 6 output
    - Verify no backslashes in tags
    
    Example:
    ```xml
    <enclosure 
      url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.x/SoundEffect.zip"
-     sparkle:edSignature="SIGNATURE_FROM_STEP_7"
-     length="LENGTH_FROM_STEP_7"
+     sparkle:edSignature="SIGNATURE_FROM_BUILD_OUTPUT"
+     length="LENGTH_FROM_BUILD_OUTPUT"
      type="application/octet-stream"
    />
    ```
 
-10. **Deploy Appcast to GitHub Pages**
+9. **Deploy Appcast to GitHub Pages**
     ```bash
     git checkout gh-pages
     cp appcast.xml .
@@ -143,7 +139,7 @@ INFOPLIST_FILE = SoundEffect/Info.plist
     git checkout develop
     ```
 
-11. **Test**
+10. **Test**
     - Install app
     - Click "Check for Updates"
     - Should detect new version and install successfully!

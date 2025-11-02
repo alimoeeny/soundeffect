@@ -239,6 +239,16 @@ gh-pages branch:
 
 ## Testing Checklist
 
+### Pre-Release Verification
+- [ ] Run `./scripts/verify_release.sh <version>` to validate:
+  - [ ] GitHub release exists with ZIP and DMG files
+  - [ ] Appcast XML is live and contains the new version
+  - [ ] ZIP signature matches between GitHub and appcast
+  - [ ] File size matches the `length` attribute
+  - [ ] No resource fork files in ZIP
+  - [ ] Info.plist has correct Sparkle configuration
+
+### Manual Testing
 - [ ] Build app with network permissions enabled
 - [ ] Install app from DMG
 - [ ] Check "About" shows correct version
@@ -246,6 +256,7 @@ gh-pages branch:
 - [ ] Verify no DNS errors in Console
 - [ ] Confirm update dialog appears
 - [ ] Test update installation
+- [ ] Verify app restarts with new version
 
 ## Key Takeaways
 
@@ -254,6 +265,9 @@ gh-pages branch:
 3. **XML formatting matters** - shell escaping can break parsers
 4. **Test with Console.app** - shows exact Sparkle errors
 5. **Custom domains need final URL** - not the redirect source
+6. **Always verify before testing** - Use `verify_release.sh` script to catch issues before manual testing
+7. **Signature must match exactly** - Download the uploaded ZIP and verify signature matches appcast
+8. **File size matters** - The `length` attribute in appcast must match the actual ZIP file size
 
 ## Resources
 
@@ -268,7 +282,15 @@ gh-pages branch:
 - **v1.0.4**: Updated feed URL to custom domain (broken - still no network)
 - **v1.0.5**: Dynamic version in About (broken - still no network)
 - **v1.0.6**: ✅ **WORKING** - Enabled network permissions!
+- **v1.0.7-1.0.11**: Various attempts to fix installer errors (signature issues, resource forks, sandboxing)
+- **v1.0.12**: ✅ **Auto-updates fully working** - Disabled sandbox in project settings
+- **v1.0.13**: ✅ **First successful auto-update** - Updated from v1.0.12 via Sparkle!
+
+## Tools
+
+- **`scripts/release.sh`** - Automated build, notarize, sign, and package script
+- **`scripts/verify_release.sh`** - Pre-release verification to catch issues before testing
 
 ---
 
-**Last Updated**: October 25, 2024
+**Last Updated**: November 2, 2024

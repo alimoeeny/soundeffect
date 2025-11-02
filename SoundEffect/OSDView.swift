@@ -32,38 +32,36 @@ struct OSDView: View {
                         .strokeBorder(.white.opacity(0.15), lineWidth: 1)
                 )
 
-            VStack(spacing: 20) {
+            VStack(spacing: 24) {
                 // Icon
                 Image(systemName: isMuted ? "speaker.slash.fill" : "speaker.wave.3.fill")
                     .font(.system(size: 48))
                     .foregroundStyle(isMuted ? .red : Color(red: 119/255, green: 117/255, blue: 113/255))
                     .symbolEffect(.bounce, value: isMuted)
 
-                VStack(spacing: 8) {
-                    // Volume bars
-                    HStack(spacing: barSpacing) {
-                        ForEach(0..<barCount, id: \.self) { index in
-                            VolumeBar(
-                                index: index,
-                                totalBars: barCount,
-                                volume: volume,
-                                isMuted: isMuted,
-                                barWidth: barWidth,
-                                barHeight: barHeight
-                            )
-                        }
+                // Volume bars
+                HStack(spacing: barSpacing) {
+                    ForEach(0..<barCount, id: \.self) { index in
+                        VolumeBar(
+                            index: index,
+                            totalBars: barCount,
+                            volume: volume,
+                            isMuted: isMuted,
+                            barWidth: barWidth,
+                            barHeight: barHeight
+                        )
                     }
-                    .frame(height: 50)
-
-                    // Volume percentage
-                    Text("\(Int(volume * 100))%")
-                        .font(.system(size: 14, weight: .medium, design: .rounded))
-                        .foregroundStyle(Color(red: 119/255, green: 117/255, blue: 113/255))
                 }
+                .frame(height: 50)
+
+                // Volume percentage (larger)
+                Text("\(Int(volume * 100))%")
+                    .font(.system(size: 42, weight: .bold, design: .rounded))
+                    .foregroundStyle(Color(red: 119/255, green: 117/255, blue: 113/255))
             }
             .padding(30)
         }
-        .frame(width: 280, height: 200)
+        .frame(width: 280, height: 280)
         .padding(15)
         .compositingGroup()
         .opacity(isVisible ? 1 : 0)

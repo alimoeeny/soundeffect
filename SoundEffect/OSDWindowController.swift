@@ -14,7 +14,7 @@ class OSDWindowController: NSWindowController {
     
     convenience init(contentView: NSView) {
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 310, height: 230),
+            contentRect: NSRect(x: 0, y: 0, width: 310, height: 310),
             styleMask: [.borderless],
             backing: .buffered,
             defer: false
@@ -83,7 +83,8 @@ class OSDWindowController: NSWindowController {
         let windowFrame = window.frame
         
         let x = screenFrame.midX - windowFrame.width / 2
-        let y = screenFrame.midY - windowFrame.height / 2 + 100 // Slightly above center
+        // Position at 1/4 from bottom (3/4 from top)
+        let y = screenFrame.minY + (screenFrame.height * 0.25) - windowFrame.height / 2
         
         window.setFrameOrigin(NSPoint(x: x, y: y))
     }

@@ -6,6 +6,26 @@
     <description>SoundEffect app updates</description>
     <language>en</language>
     <item>
+      <title>Version 1.0.13</title>
+      <sparkle:version>1.0.13</sparkle:version>
+      <sparkle:shortVersionString>1.0.13</sparkle:shortVersionString>
+      <pubDate>Sat, 02 Nov 2024 08:00:00 -0400</pubDate>
+      <description><![CDATA[
+        <h2>SoundEffect v1.0.13</h2>
+        <ul>
+          <li>🎨 Square OSD design (280×280)</li>
+          <li>📊 Larger, bolder volume percentage (42pt)</li>
+          <li>📍 Repositioned OSD lower on screen for better visibility</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.13/SoundEffect.zip"
+        sparkle:edSignature="ZlBPNL/+NdoJmzJkx5xKAYz1k/OomQ/EN0VQjgWOmnSCF487iUoLeEsAPW9t5572jLApMgBCrrjqhssmMnnOBQ=="
+        length="2650797"
+        type="application/octet-stream"
+      />
+    </item>
+    <item>
       <title>Version 1.0.12</title>
       <sparkle:version>1.0.12</sparkle:version>
       <sparkle:shortVersionString>1.0.12</sparkle:shortVersionString>

@@ -89,6 +89,20 @@ INFOPLIST_FILE = SoundEffect/Info.plist
 
 **⚠️ IMPORTANT**: You MUST sign the release files BEFORE uploading to GitHub. The signature is cryptographically tied to the exact file contents!
 
+### Pre-Release Checklist
+
+Before building, **ALWAYS** update these two values in `project.pbxproj`:
+
+1. **`MARKETING_VERSION`**: The user-facing version (e.g., `1.0.14`)
+2. **`CURRENT_PROJECT_VERSION`**: The build number (e.g., `14`)
+
+**⚠️ CRITICAL**: The build number MUST increment with each release! Sparkle uses both version and build number to determine if an update is newer. If you forget to increment the build number, users will see repeated update prompts.
+
+**Recommended pattern**: Use the version without dots as build number
+- v1.0.14 → Build 14
+- v1.0.15 → Build 15
+- v1.1.0 → Build 110
+
 6. **Build, Notarize, and Sign Release**
    ```bash
    rm -rf build/
@@ -183,6 +197,19 @@ INFOPLIST_FILE = SoundEffect/Info.plist
 
 **Solution**: Enable outgoing network connections in entitlements
 
+### "Update available" dialog appears repeatedly
+
+**Cause**: Build number (`CURRENT_PROJECT_VERSION`) not incrementing between releases. Sparkle compares both version string AND build number.
+
+**Solution**: 
+1. Always increment `CURRENT_PROJECT_VERSION` in `project.pbxproj` before each release
+2. Use version without dots as build number (e.g., v1.0.14 → Build 14)
+3. Release a new version with proper build number to fix for existing users
+
+**Example**:
+- v1.0.13 with Build 1 → v1.0.14 with Build 14 ✅
+- v1.0.13 with Build 1 → v1.0.14 with Build 1 ❌ (will show repeated prompts)
+
 ## File Structure
 
 ```
@@ -268,6 +295,7 @@ gh-pages branch:
 6. **Always verify before testing** - Use `verify_release.sh` script to catch issues before manual testing
 7. **Signature must match exactly** - Download the uploaded ZIP and verify signature matches appcast
 8. **File size matters** - The `length` attribute in appcast must match the actual ZIP file size
+9. **Build numbers MUST increment** - Sparkle uses both version string AND build number for comparison. Always increment `CURRENT_PROJECT_VERSION` with each release!
 
 ## Resources
 
@@ -285,6 +313,7 @@ gh-pages branch:
 - **v1.0.7-1.0.11**: Various attempts to fix installer errors (signature issues, resource forks, sandboxing)
 - **v1.0.12**: ✅ **Auto-updates fully working** - Disabled sandbox in project settings
 - **v1.0.13**: ✅ **First successful auto-update** - Updated from v1.0.12 via Sparkle!
+- **v1.0.14**: 🔧 **Fixed repeated update prompts** - Incremented build number from 1 to 14
 
 ## Tools
 

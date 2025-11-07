@@ -6,16 +6,20 @@
 //
 
 import AppKit
+import ServiceManagement
 import SwiftUI
 
-class MenuBarController: NSObject {
+class MenuBarController: NSObject, NSMenuDelegate {
     private var statusItem: NSStatusItem?
     private let onQuit: () -> Void
     private let updateManager: UpdateManager
+    private let launchAtLoginManager: LaunchAtLoginManager
+    private var launchAtLoginItem: NSMenuItem?
     
-    init(onQuit: @escaping () -> Void, updateManager: UpdateManager) {
+    init(onQuit: @escaping () -> Void, updateManager: UpdateManager, launchAtLoginManager: LaunchAtLoginManager) {
         self.onQuit = onQuit
         self.updateManager = updateManager
+        self.launchAtLoginManager = launchAtLoginManager
         super.init()
         setupMenuBar()
     }
@@ -33,6 +37,7 @@ class MenuBarController: NSObject {
     
     private func setupMenu() {
         let menu = NSMenu()
+        menu.delegate = self
         
         // About item
         let aboutItem = NSMenuItem(
@@ -53,6 +58,18 @@ class MenuBarController: NSObject {
         )
         settingsItem.target = self
         menu.addItem(settingsItem)
+        
+        menu.addItem(NSMenuItem.separator())
+        
+        // Launch at Login item
+        let launchItem = NSMenuItem(
+            title: "Launch at Login",
+            action: #selector(toggleLaunchAtLogin),
+            keyEquivalent: ""
+        )
+        launchItem.target = self
+        menu.addItem(launchItem)
+        self.launchAtLoginItem = launchItem
         
         menu.addItem(NSMenuItem.separator())
         
@@ -106,5 +123,38 @@ class MenuBarController: NSObject {
     
     @objc private func quitApp() {
         onQuit()
+    }
+    
+    @objc private func toggleLaunchAtLogin() {
+        let newState = !launchAtLoginManager.isEnabled
+        
+        do {
+            try launchAtLoginManager.setEnabled(newState)
+        } catch {
+            // Revert UI state
+            launchAtLoginManager.refreshStatus()
+            updateLaunchAtLoginItemState()
+            
+            // Show error alert
+            let alert = NSAlert()
+            alert.messageText = "Launch at Login Error"
+            alert.informativeText = "Failed to \(newState ? "enable" : "disable") launch at login.\n\nError: \(error.localizedDescription)\n\nYou can manage login items in System Settings > General > Login Items."
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
+            
+            print("[LaunchAtLogin] Error toggling launch at login: \(error)")
+        }
+    }
+    
+    // MARK: - NSMenuDelegate
+    
+    func menuNeedsUpdate(_ menu: NSMenu) {
+        launchAtLoginManager.refreshStatus()
+        updateLaunchAtLoginItemState()
+    }
+    
+    private func updateLaunchAtLoginItemState() {
+        launchAtLoginItem?.state = launchAtLoginManager.isEnabled ? .on : .off
     }
 }

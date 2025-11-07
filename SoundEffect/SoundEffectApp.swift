@@ -12,6 +12,7 @@ struct SoundEffectApp: App {
     @State private var audioMonitor = AudioMonitor()
     @State private var osdCoordinator: OSDCoordinator?
     @State private var menuBarController: MenuBarController?
+    @State private var launchAtLoginManager = LaunchAtLoginManager()
     private let updateManager = UpdateManager()
     
     init() {
@@ -20,11 +21,15 @@ struct SoundEffectApp: App {
         _audioMonitor = State(initialValue: monitor)
         _osdCoordinator = State(initialValue: OSDCoordinator(audioMonitor: monitor))
         
-        // Initialize menu bar
-        let manager = UpdateManager()
+        // Initialize launch at login manager
+        let loginManager = LaunchAtLoginManager()
+        _launchAtLoginManager = State(initialValue: loginManager)
+        
+        // Initialize menu bar with shared update manager
         _menuBarController = State(initialValue: MenuBarController(
             onQuit: { NSApplication.shared.terminate(nil) },
-            updateManager: manager
+            updateManager: updateManager,
+            launchAtLoginManager: loginManager
         ))
     }
     

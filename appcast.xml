@@ -6,6 +6,26 @@
     <description>SoundEffect app updates</description>
     <language>en</language>
     <item>
+      <title>Version 1.0.15</title>
+      <sparkle:version>1.0.15</sparkle:version>
+      <sparkle:shortVersionString>1.0.15</sparkle:shortVersionString>
+      <pubDate>Wed, 06 Nov 2024 22:43:00 -0500</pubDate>
+      <description><![CDATA[
+        <h2>SoundEffect v1.0.15</h2>
+        <ul>
+          <li>🚀 Launch at Login menu item</li>
+          <li>⚙️ Enable/disable automatic app launch on startup</li>
+          <li>✅ System Settings integration</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.15/SoundEffect.zip"
+        sparkle:edSignature="s6MsVcpaTBh24iuFK+87/LryNO3sJYf/GnZp/bLkbxoE6pBPj/+LZGOOQirsYgxYwUvrNfscaQxpB6YXQITtBA=="
+        length="2659124"
+        type="application/octet-stream"
+      />
+    </item>
+    <item>
       <title>Version 1.0.14</title>
       <sparkle:version>1.0.14</sparkle:version>
       <sparkle:shortVersionString>1.0.14</sparkle:shortVersionString>

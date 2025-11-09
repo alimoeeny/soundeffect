@@ -13,6 +13,29 @@ fi
 
 echo "🚀 Building SoundEffect v${VERSION}..."
 
+PBX="SoundEffect.xcodeproj/project.pbxproj"
+PLIST="SoundEffect/Info.plist"
+echo "🔎 Verifying project version settings..."
+MV_LINES=$(grep -E 'MARKETING_VERSION = ' "$PBX" | sed -E 's/.*MARKETING_VERSION = ([^;]+);/\1/' | sort -u)
+if [ "$(echo "$MV_LINES" | wc -l | tr -d ' ')" -ne 1 ] || [ "$MV_LINES" != "$VERSION" ]; then
+    echo "❌ MARKETING_VERSION mismatch. Found: [$MV_LINES] Expected: [$VERSION]"
+    exit 1
+fi
+BV_LINES=$(grep -E 'CURRENT_PROJECT_VERSION = ' "$PBX" | sed -E 's/.*CURRENT_PROJECT_VERSION = ([^;]+);/\1/' | sort -u)
+if [ "$(echo "$BV_LINES" | wc -l | tr -d ' ')" -ne 1 ] || ! [[ "$BV_LINES" =~ ^[0-9]+$ ]]; then
+    echo "❌ CURRENT_PROJECT_VERSION invalid or inconsistent. Found: [$BV_LINES]"
+    exit 1
+fi
+if ! grep -Fq '$(MARKETING_VERSION)' "$PLIST"; then
+    echo "❌ Info.plist CFBundleShortVersionString is not using $(MARKETING_VERSION)"
+    exit 1
+fi
+if ! grep -Fq '$(CURRENT_PROJECT_VERSION)' "$PLIST"; then
+    echo "❌ Info.plist CFBundleVersion is not using $(CURRENT_PROJECT_VERSION)"
+    exit 1
+fi
+echo "✅ Version checks passed."
+
 # Clean previous builds
 rm -rf ./build
 mkdir -p ./build

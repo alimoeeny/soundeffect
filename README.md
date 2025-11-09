@@ -1,6 +1,18 @@
 # SoundEffect 🍎
 
 
+# Why?
+
+Because macOS Tahoe took away the audio volume OSD. WWWHHHHYYYYY???!!!
+
+- Apple took it. We put it back.
+- Fixing what Apple broke.
+- The missing macOS Tahoe volume on screen display.
+- Make volume visible again.
+- Tahoe hid it. We show it.
+- The volume OSD, back from the dead.
+
+
 
 ![SoundEffect Screenshot](.github/screenshots/screenshot.png)
 

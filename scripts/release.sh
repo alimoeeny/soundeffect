@@ -36,6 +36,10 @@ if ! grep -Fq '$(CURRENT_PROJECT_VERSION)' "$PLIST"; then
 fi
 echo "✅ Version checks passed."
 
+# Appcast guidance: Sparkle compares <sparkle:version> to CFBundleVersion (build)
+echo "ℹ️  Appcast requirement: set <sparkle:version> to numeric build = ${BV_LINES}"
+echo "ℹ️  Appcast requirement: set <sparkle:shortVersionString> to ${VERSION}"
+
 # Clean previous builds
 rm -rf ./build
 mkdir -p ./build

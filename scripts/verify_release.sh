@@ -77,6 +77,59 @@ APPCAST_CONTENT=$(curl -s "$APPCAST_URL")
 if echo "$APPCAST_CONTENT" | grep -q "<title>Version ${VERSION}</title>"; then
     success "Appcast contains version ${VERSION}"
     
+    # Extract build (sparkle:version) and short version
+    APPCAST_BUILD=$(echo "$APPCAST_CONTENT" | grep -A 5 "Version ${VERSION}" | grep "<sparkle:version>" | sed -E 's/.*<sparkle:version>([^<]+)<\/sparkle:version>.*/\1/')
+    APPCAST_SHORT=$(echo "$APPCAST_CONTENT" | grep -A 5 "Version ${VERSION}" | grep "<sparkle:shortVersionString>" | sed -E 's/.*<sparkle:shortVersionString>([^<]+)<\/sparkle:shortVersionString>.*/\1/')
+
+    # Extract signature and length from appcast (needed for header checks below)
+    APPCAST_SIGNATURE=$(echo "$APPCAST_CONTENT" | grep -A 5 "Version ${VERSION}" | grep "sparkle:edSignature" | sed 's/.*sparkle:edSignature="\([^"]*\)".*/\1/')
+    APPCAST_LENGTH=$(echo "$APPCAST_CONTENT" | grep -A 5 "Version ${VERSION}" | grep "length=" | sed 's/.*length="\([^"]*\)".*/\1/')
+
+    # Load current project build number (should be a single numeric value)
+    PBX="SoundEffect.xcodeproj/project.pbxproj"
+    BV_LINES=$(grep -E 'CURRENT_PROJECT_VERSION = ' "$PBX" | sed -E 's/.*CURRENT_PROJECT_VERSION = ([^;]+);/\1/' | sort -u)
+
+    # Validate appcast build is numeric and matches CURRENT_PROJECT_VERSION
+    if [[ "$APPCAST_BUILD" =~ ^[0-9]+$ ]]; then
+        success "Appcast sparkle:version is numeric: ${APPCAST_BUILD}"
+    else
+        error "Appcast sparkle:version is NOT numeric: [${APPCAST_BUILD}]"
+    fi
+
+    if [ "$(echo "$BV_LINES" | wc -l | tr -d ' ')" -eq 1 ]; then
+        if [ "$APPCAST_BUILD" = "$BV_LINES" ]; then
+            success "Appcast sparkle:version matches CURRENT_PROJECT_VERSION (${APPCAST_BUILD})"
+        else
+            error "Appcast sparkle:version (${APPCAST_BUILD}) does NOT match CURRENT_PROJECT_VERSION (${BV_LINES})"
+        fi
+    else
+        error "CURRENT_PROJECT_VERSION invalid or inconsistent in project: [${BV_LINES}]"
+    fi
+
+    # Validate shortVersionString matches the requested version
+    if [ "$APPCAST_SHORT" = "$VERSION" ]; then
+        success "Appcast shortVersionString matches ${VERSION}"
+    else
+        error "Appcast shortVersionString (${APPCAST_SHORT}) does NOT match ${VERSION}"
+    fi
+
+    # Optional: HEAD check ZIP Content-Length vs appcast length (no download)
+    if curl -s -I -L "$ZIP_URL" > /tmp/se_zip_headers.$$; then
+        HEAD_LEN=$(awk 'tolower($1)=="content-length:" {print $2}' /tmp/se_zip_headers.$$ | tr -d '\r')
+        if [ -n "$HEAD_LEN" ] && [ -n "$APPCAST_LENGTH" ]; then
+            if [ "$HEAD_LEN" = "$APPCAST_LENGTH" ]; then
+                success "ZIP Content-Length matches appcast (${HEAD_LEN})"
+            else
+                warning "ZIP Content-Length (${HEAD_LEN}) differs from appcast (${APPCAST_LENGTH})"
+            fi
+        else
+            warning "Unable to determine Content-Length from headers"
+        fi
+        rm -f /tmp/se_zip_headers.$$ || true
+    else
+        warning "HEAD request to ZIP_URL failed"
+    fi
+
     # Extract signature and length from appcast
     APPCAST_SIGNATURE=$(echo "$APPCAST_CONTENT" | grep -A 5 "Version ${VERSION}" | grep "sparkle:edSignature" | sed 's/.*sparkle:edSignature="\([^"]*\)".*/\1/')
     APPCAST_LENGTH=$(echo "$APPCAST_CONTENT" | grep -A 5 "Version ${VERSION}" | grep "length=" | sed 's/.*length="\([^"]*\)".*/\1/')

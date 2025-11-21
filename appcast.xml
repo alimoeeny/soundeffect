@@ -6,6 +6,25 @@
     <description>SoundEffect app updates</description>
     <language>en</language>
     <item>
+      <title>Version 1.0.17</title>
+      <sparkle:version>17</sparkle:version>
+      <sparkle:shortVersionString>1.0.17</sparkle:shortVersionString>
+      <pubDate>Thu, 20 Nov 2025 19:35:00 -0500</pubDate>
+      <description><![CDATA[
+        <h2>SoundEffect v1.0.17</h2>
+        <ul>
+          <li>💥 Added Sentry crash reporting (opt-in)</li>
+          <li>🔧 Improved stability and error handling</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.17/SoundEffect.zip"
+        sparkle:edSignature="nFyWeAE8n1wQU9J6m7vX4G9dmlSxlStNqJVzAD4hSrZBw1oBQUdGQOGmWJ1EKF6w2VSRKJKBb8D06tV64CNDCw=="
+        length="3869467"
+        type="application/octet-stream"
+      />
+    </item>
+    <item>
       <title>Version 1.0.16</title>
       <sparkle:version>16</sparkle:version>
       <sparkle:shortVersionString>1.0.16</sparkle:shortVersionString>

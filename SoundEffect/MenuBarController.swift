@@ -15,7 +15,7 @@ class MenuBarController: NSObject, NSMenuDelegate {
     private let updateManager: UpdateManager
     private let launchAtLoginManager: LaunchAtLoginManager
     private var launchAtLoginItem: NSMenuItem?
-    
+
     init(onQuit: @escaping () -> Void, updateManager: UpdateManager, launchAtLoginManager: LaunchAtLoginManager) {
         self.onQuit = onQuit
         self.updateManager = updateManager
@@ -23,22 +23,22 @@ class MenuBarController: NSObject, NSMenuDelegate {
         super.init()
         setupMenuBar()
     }
-    
+
     private func setupMenuBar() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        
+
         if let button = statusItem?.button {
             button.image = NSImage(named: "MenuBarIcon")
             button.image?.isTemplate = true  // Adapts to light/dark mode
         }
-        
+
         setupMenu()
     }
-    
+
     private func setupMenu() {
         let menu = NSMenu()
         menu.delegate = self
-        
+
         // About item
         let aboutItem = NSMenuItem(
             title: "About SoundEffect",
@@ -47,9 +47,9 @@ class MenuBarController: NSObject, NSMenuDelegate {
         )
         aboutItem.target = self
         menu.addItem(aboutItem)
-        
+
         menu.addItem(NSMenuItem.separator())
-        
+
         // Settings item (placeholder for future)
         let settingsItem = NSMenuItem(
             title: "Settings...",
@@ -58,9 +58,9 @@ class MenuBarController: NSObject, NSMenuDelegate {
         )
         settingsItem.target = self
         menu.addItem(settingsItem)
-        
+
         menu.addItem(NSMenuItem.separator())
-        
+
         // Launch at Login item
         let launchItem = NSMenuItem(
             title: "Launch at Login",
@@ -70,9 +70,23 @@ class MenuBarController: NSObject, NSMenuDelegate {
         launchItem.target = self
         menu.addItem(launchItem)
         self.launchAtLoginItem = launchItem
-        
+
+
+
         menu.addItem(NSMenuItem.separator())
-        
+
+        // Share Crash Reports item
+        let crashReportItem = NSMenuItem(
+            title: "Share Crash Reports",
+            action: #selector(toggleCrashReporting),
+            keyEquivalent: ""
+        )
+        crashReportItem.target = self
+        crashReportItem.state = CrashReporter.shared.isEnabled ? .on : .off
+        menu.addItem(crashReportItem)
+
+        menu.addItem(NSMenuItem.separator())
+
         // Check for Updates item
         let updateItem = NSMenuItem(
             title: "Check for Updates...",
@@ -81,9 +95,9 @@ class MenuBarController: NSObject, NSMenuDelegate {
         )
         updateItem.target = self
         menu.addItem(updateItem)
-        
+
         menu.addItem(NSMenuItem.separator())
-        
+
         // Quit item
         let quitItem = NSMenuItem(
             title: "Quit SoundEffect",
@@ -92,14 +106,14 @@ class MenuBarController: NSObject, NSMenuDelegate {
         )
         quitItem.target = self
         menu.addItem(quitItem)
-        
+
         statusItem?.menu = menu
     }
-    
+
     @objc private func showAbout() {
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown"
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown"
-        
+
         let alert = NSAlert()
         alert.messageText = "SoundEffect"
         alert.informativeText = "Custom volume OSD for macOS\n\nVersion \(version) (Build \(build))\n\nMonitors system audio and displays a beautiful overlay when volume changes."
@@ -107,7 +121,7 @@ class MenuBarController: NSObject, NSMenuDelegate {
         alert.addButton(withTitle: "OK")
         alert.runModal()
     }
-    
+
     @objc private func showSettings() {
         let alert = NSAlert()
         alert.messageText = "Settings"
@@ -116,25 +130,25 @@ class MenuBarController: NSObject, NSMenuDelegate {
         alert.addButton(withTitle: "OK")
         alert.runModal()
     }
-    
+
     @objc private func checkForUpdates() {
         updateManager.checkForUpdates()
     }
-    
+
     @objc private func quitApp() {
         onQuit()
     }
-    
+
     @objc private func toggleLaunchAtLogin() {
         let newState = !launchAtLoginManager.isEnabled
-        
+
         do {
             try launchAtLoginManager.setEnabled(newState)
         } catch {
             // Revert UI state
             launchAtLoginManager.refreshStatus()
             updateLaunchAtLoginItemState()
-            
+
             // Show error alert
             let alert = NSAlert()
             alert.messageText = "Launch at Login Error"
@@ -142,18 +156,33 @@ class MenuBarController: NSObject, NSMenuDelegate {
             alert.alertStyle = .warning
             alert.addButton(withTitle: "OK")
             alert.runModal()
-            
+
             print("[LaunchAtLogin] Error toggling launch at login: \(error)")
         }
     }
-    
+
+    @objc private func toggleCrashReporting(_ sender: NSMenuItem) {
+        let newState = !CrashReporter.shared.isEnabled
+        CrashReporter.shared.isEnabled = newState
+        sender.state = newState ? .on : .off
+
+        if newState {
+            let alert = NSAlert()
+            alert.messageText = "Crash Reporting Enabled"
+            alert.informativeText = "Thank you for helping improve SoundEffect! Crash reports will be sent anonymously."
+            alert.alertStyle = .informational
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
+        }
+    }
+
     // MARK: - NSMenuDelegate
-    
+
     func menuNeedsUpdate(_ menu: NSMenu) {
         launchAtLoginManager.refreshStatus()
         updateLaunchAtLoginItemState()
     }
-    
+
     private func updateLaunchAtLoginItemState() {
         launchAtLoginItem?.state = launchAtLoginManager.isEnabled ? .on : .off
     }

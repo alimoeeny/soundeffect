@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41D4EEE62EA51A50007FDC90 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 41D4EEE52EA51A50007FDC90 /* Sparkle */; };
+		41B805162ECFE971008FE96C /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 41B805152ECFE971008FE96C /* Sentry */; };
+		41B805232ECFEA5A008FE96C /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 41B805222ECFEA5A008FE96C /* Sparkle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,17 +28,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41D4EEE62EA51A50007FDC90 /* Sparkle in Frameworks */,
+				41B805162ECFE971008FE96C /* Sentry in Frameworks */,
+				41B805232ECFEA5A008FE96C /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41B805212ECFEA5A008FE96C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		41D4EEA42EA3E90C007FDC90 = {
 			isa = PBXGroup;
 			children = (
 				41D4EEAF2EA3E90C007FDC90 /* SoundEffect */,
+				41B805212ECFEA5A008FE96C /* Frameworks */,
 				41D4EEAE2EA3E90C007FDC90 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,7 +80,8 @@
 			);
 			name = SoundEffect;
 			packageProductDependencies = (
-				41D4EEE52EA51A50007FDC90 /* Sparkle */,
+				41B805152ECFE971008FE96C /* Sentry */,
+				41B805222ECFEA5A008FE96C /* Sparkle */,
 			);
 			productName = SoundEffect;
 			productReference = 41D4EEAD2EA3E90C007FDC90 /* SoundEffect.app */;
@@ -102,6 +113,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				41D4EEE42EA51A50007FDC90 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				41B805142ECFE8F7008FE96C /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 41D4EEAE2EA3E90C007FDC90 /* Products */;
@@ -261,7 +273,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = R9UTM4Y983;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -284,7 +296,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.0.17;
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprefrontal.SoundEffect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -304,7 +316,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = R9UTM4Y983;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -327,7 +339,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.16;
+				MARKETING_VERSION = 1.0.17;
 				PRODUCT_BUNDLE_IDENTIFIER = com.suprefrontal.SoundEffect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -364,6 +376,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		41B805142ECFE8F7008FE96C /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.57.3;
+			};
+		};
 		41D4EEE42EA51A50007FDC90 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
@@ -375,7 +395,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		41D4EEE52EA51A50007FDC90 /* Sparkle */ = {
+		41B805152ECFE971008FE96C /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41B805142ECFE8F7008FE96C /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
+		41B805222ECFEA5A008FE96C /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 41D4EEE42EA51A50007FDC90 /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;

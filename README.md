@@ -1,5 +1,8 @@
 # SoundEffect 🍎
 
+# What is this?
+This us a custom volume HUD for macOS Tahoe. 
+it brungs back the essence of the old On screen Display that is no longer available since Tahoe.
 
 # Why?
 
@@ -11,7 +14,6 @@ Because macOS Tahoe took away the audio volume OSD. WWWHHHHYYYYY???!!!
 - Make volume visible again.
 - Tahoe hid it. We show it.
 - The volume OSD, back from the dead.
-
 
 
 ![SoundEffect Screenshot](.github/screenshots/screenshot.png)

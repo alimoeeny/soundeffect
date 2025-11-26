@@ -113,7 +113,7 @@ Before building, **ALWAYS** update these two values in `project.pbxproj`:
    - Creates `SoundEffect.zip` and signs it with Sparkle
    - Creates `SoundEffect-1.0.x.dmg` for manual downloads
    - Displays the Sparkle signature at the end
-   
+
    **IMPORTANT**: Copy the signature output! You'll need it for the appcast.
 
 7. **Create GitHub Release and Upload Files**
@@ -132,10 +132,10 @@ Before building, **ALWAYS** update these two values in `project.pbxproj`:
    - Use **ZIP file** URL (not DMG) for the enclosure
    - Include signature from step 6 output
    - Verify no backslashes in tags
-   
+
    Example:
    ```xml
-   <enclosure 
+   <enclosure
      url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.x/SoundEffect.zip"
      sparkle:edSignature="SIGNATURE_FROM_BUILD_OUTPUT"
      length="LENGTH_FROM_BUILD_OUTPUT"
@@ -164,7 +164,7 @@ Before building, **ALWAYS** update these two values in `project.pbxproj`:
 
 **Cause**: Signature mismatch! You uploaded files to GitHub BEFORE signing them with `sign_update`.
 
-**Solution**: 
+**Solution**:
 1. Delete the release assets from GitHub
 2. Sign the files in `./build/` with `sign_update`
 3. Upload the SIGNED files to GitHub
@@ -201,7 +201,7 @@ Before building, **ALWAYS** update these two values in `project.pbxproj`:
 
 **Cause**: Build number (`CURRENT_PROJECT_VERSION`) not incrementing between releases. Sparkle compares both version string AND build number.
 
-**Solution**: 
+**Solution**:
 1. Always increment `CURRENT_PROJECT_VERSION` in `project.pbxproj` before each release
 2. Use version without dots as build number (e.g., v1.0.14 → Build 14)
 3. Release a new version with proper build number to fix for existing users
@@ -253,7 +253,7 @@ gh-pages branch:
           <li>Feature 2</li>
         </ul>
       ]]></description>
-      <enclosure 
+      <enclosure
         url="https://github.com/alimoeeny/soundeffect/releases/download/vX.Y.Z/SoundEffect-X.Y.Z.dmg"
         sparkle:edSignature="SIGNATURE_FROM_SIGN_UPDATE"
         length="FILE_SIZE_IN_BYTES"
@@ -314,6 +314,10 @@ gh-pages branch:
 - **v1.0.12**: ✅ **Auto-updates fully working** - Disabled sandbox in project settings
 - **v1.0.13**: ✅ **First successful auto-update** - Updated from v1.0.12 via Sparkle!
 - **v1.0.14**: 🔧 **Fixed repeated update prompts** - Incremented build number from 1 to 14
+- **v1.0.15**: 🚀 **Launch at Login** - Added Launch at Login feature and System Settings integration
+- **v1.0.16**: 🔧 **Release Script Improvements** - Added preflight version checks and fixed build setting consistency
+- **v1.0.17**: 💥 **Crash Reporting** - Added Sentry integration for crash tracking
+- **v1.0.18**: 🔧 **Maintenance** - Routine version bump and release process verification
 
 ## Tools
 
@@ -322,4 +326,4 @@ gh-pages branch:
 
 ---
 
-**Last Updated**: November 2, 2024
+**Last Updated**: November 25, 2025

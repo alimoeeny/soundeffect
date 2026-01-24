@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct SoundEffectApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var audioMonitor = AudioMonitor()
     @State private var osdCoordinator: OSDCoordinator?
     @State private var menuBarController: MenuBarController?

@@ -293,11 +293,29 @@ class AudioMonitor {
     }
 
     fileprivate func removePropertyListeners() {
-        guard defaultOutputDeviceID != 0 else { return }
-
-        print("Removing listeners for device ID: \(defaultOutputDeviceID)")
-
+        // Remove global default device listener
         let selfPointer = Unmanaged.passUnretained(self).toOpaque()
+        
+        var defaultDeviceAddress = AudioObjectPropertyAddress(
+            mSelector: kAudioHardwarePropertyDefaultOutputDevice,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
+        )
+        
+        let globalStatus = AudioObjectRemovePropertyListener(
+            AudioObjectID(kAudioObjectSystemObject),
+            &defaultDeviceAddress,
+            deviceChangeCallback,
+            selfPointer
+        )
+        
+        if globalStatus == noErr {
+            print("Removed global default device listener")
+        }
+
+        guard defaultOutputDeviceID != 0 else { return }
+        
+        print("Removing listeners for device ID: \(defaultOutputDeviceID)")
 
         // Remove volume listeners for all possible elements
         var volumeAddress = AudioObjectPropertyAddress(

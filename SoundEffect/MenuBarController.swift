@@ -15,16 +15,24 @@ class MenuBarController: NSObject, NSMenuDelegate {
     private let updateManager: UpdateManager
     private let launchAtLoginManager: LaunchAtLoginManager
     private var launchAtLoginItem: NSMenuItem?
+    private let hideMenuBarIconKey = "hideMenuBarIcon"
 
     init(onQuit: @escaping () -> Void, updateManager: UpdateManager, launchAtLoginManager: LaunchAtLoginManager) {
         self.onQuit = onQuit
         self.updateManager = updateManager
         self.launchAtLoginManager = launchAtLoginManager
         super.init()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(forceShowMenuBarIcon), name: .showMenuBarIcon, object: nil)
+
         setupMenuBar()
     }
 
     private func setupMenuBar() {
+        if UserDefaults.standard.bool(forKey: hideMenuBarIconKey) {
+            return
+        }
+
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
         if let button = statusItem?.button {
@@ -87,6 +95,17 @@ class MenuBarController: NSObject, NSMenuDelegate {
 
         menu.addItem(NSMenuItem.separator())
 
+        // Hide Menu Bar Icon item
+        let hideItem = NSMenuItem(
+            title: "Hide Menu Bar Icon",
+            action: #selector(confirmHideMenuBarIcon),
+            keyEquivalent: ""
+        )
+        hideItem.target = self
+        menu.addItem(hideItem)
+
+        menu.addItem(NSMenuItem.separator())
+
         // Check for Updates item
         let updateItem = NSMenuItem(
             title: "Check for Updates...",
@@ -137,6 +156,32 @@ class MenuBarController: NSObject, NSMenuDelegate {
 
     @objc private func quitApp() {
         onQuit()
+    }
+
+    @objc private func confirmHideMenuBarIcon() {
+        let alert = NSAlert()
+        alert.messageText = "Hide Menu Bar Icon?"
+        alert.informativeText = "The menu bar icon will be hidden. To show it again, simply open SoundEffect from your Applications folder or Spotlight."
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "Hide")
+        alert.addButton(withTitle: "Cancel")
+
+        if alert.runModal() == .alertFirstButtonReturn {
+            toggleHideMenuBarIcon()
+        }
+    }
+
+    @objc private func forceShowMenuBarIcon() {
+        UserDefaults.standard.set(false, forKey: hideMenuBarIconKey)
+        if statusItem == nil {
+            setupMenuBar()
+        }
+    }
+
+    private func toggleHideMenuBarIcon() {
+        let shouldHide = true // We only call this when hiding
+        UserDefaults.standard.set(shouldHide, forKey: hideMenuBarIconKey)
+        statusItem = nil
     }
 
     @objc private func toggleLaunchAtLogin() {

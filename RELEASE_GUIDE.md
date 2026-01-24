@@ -205,6 +205,48 @@ echo "3. Create GitHub release and upload DMG"
 - [ ] Sparkle updates are signed (see SPARKLE_SETUP.md)
 - [ ] SUFeedURL points to HTTPS endpoint
 
+## Lessons Learned
+
+### Branch Management
+- **Always verify you're on the correct branch** before starting the release process
+- Version changes should be committed to `develop` branch
+- The `gh-pages` branch is only for appcast.xml updates
+- Workflow: develop → tag → GitHub release → gh-pages appcast update
+
+### Version Number Format
+- **MARKETING_VERSION**: User-facing (e.g., "1.0.19")
+- **CURRENT_PROJECT_VERSION**: Must be numeric only (e.g., "19")
+- **sparkle:version in appcast**: Must match CURRENT_PROJECT_VERSION exactly (numeric)
+- **sparkle:shortVersionString in appcast**: Must match MARKETING_VERSION exactly
+
+### Appcast Updates
+- New version entry goes at the **top** of the appcast.xml
+- Date format: `Fri, 24 Jan 2025 18:15:00 -0500` (RFC 822)
+- Signature and length must match exactly what release.sh outputs
+- Always verify the live appcast URL after deployment
+- Content-Length from GitHub must match appcast length attribute
+
+### Verification Steps
+After release, always verify:
+1. Appcast is live at https://ali.moeeny.com/soundeffect/appcast.xml
+2. GitHub release exists with both ZIP and DMG files
+3. ZIP file Content-Length matches appcast length
+4. sparkle:version is numeric and matches CURRENT_PROJECT_VERSION
+5. Release notes are clear about what was fixed/added
+
+### Common Pitfalls
+- Don't forget to push both the develop branch AND the tag
+- Appcast changes must be committed to gh-pages, not develop
+- The release.sh script outputs the Sparkle signature - save it immediately
+- If verification script hangs, manually check the key components
+- Remember to switch back to develop after updating gh-pages
+
+### Release Commit Messages
+Use clear, descriptive commit messages:
+- Version bump: `chore: bump version to X.Y.Z`
+- Appcast update: `Update appcast for vX.Y.Z`
+- Tag annotation: `Release version X.Y.Z - Brief description of main fix/feature`
+
 ## Resources
 
 - [Apple Notarization Guide](https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution)

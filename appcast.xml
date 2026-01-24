@@ -6,6 +6,26 @@
     <description>SoundEffect app updates</description>
     <language>en</language>
     <item>
+      <title>Version 1.0.19</title>
+      <sparkle:version>19</sparkle:version>
+      <sparkle:shortVersionString>1.0.19</sparkle:shortVersionString>
+      <pubDate>Fri, 24 Jan 2025 18:15:00 -0500</pubDate>
+      <description><![CDATA[
+        <h2>SoundEffect v1.0.19</h2>
+        <ul>
+          <li>🐛 Fixed crash in UpdateManager when handling unexpected network responses</li>
+          <li>✅ Implemented proper SPUUpdaterDelegate error handling</li>
+          <li>🔒 Prevents EXC_BAD_ACCESS crashes during update checks</li>
+        </ul>
+      ]]></description>
+      <enclosure
+        url="https://github.com/alimoeeny/soundeffect/releases/download/v1.0.19/SoundEffect.zip"
+        sparkle:edSignature="jNO3y7NsNoQtrDu34hr/Tjuw8vxAyKNaKUdOx/DOiy13HUGLO0GzEksHyRchLeiW4zLQW/iYm6bD85zOQZd/DQ=="
+        length="3879281"
+        type="application/octet-stream"
+      />
+    </item>
+    <item>
       <title>Version 1.0.18</title>
       <sparkle:version>18</sparkle:version>
       <sparkle:shortVersionString>1.0.18</sparkle:shortVersionString>
